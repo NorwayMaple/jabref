@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<DialogPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.jabref.gui.exporter.ExportCustomizationDialogView">
+<DialogPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jabref.gui.exporter.ExportCustomizationDialogView">
    <content>
       <VBox prefHeight="200.0" prefWidth="500.0">
          <children>
@@ -18,12 +19,16 @@
                 <TableColumn fx:id="extensionColumn" prefWidth="100.0" text="%Extension" />
               </columns>
             </TableView>
+            <ButtonBar prefHeight="27.0" prefWidth="200.0">
+              <buttons>
+                <Button fx:id="addButton" ButtonBar.buttonData="LEFT" text="%Add" onAction="#addExporter" />
+                <Button fx:id="modifyButton" text="%Modify" onAction="#modifyExporter"/>
+                <Button fx:id="removeButton" ButtonBar.buttonData="RIGHT" text="%Remove" onAction="#removeExporter" />                
+              </buttons>
+            </ButtonBar>
          </children>
       </VBox>
    </content>
-   <ButtonType fx:id="addButton" text="%Add" />
-   <ButtonType fx:id="modifyButton" text="%Modify" />
-   <ButtonType fx:id="removeButton" text="%Remove" />
    <ButtonType fx:id="closeButton" fx:constant="OK" />
    <ButtonType fx:constant="CANCEL" />
 </DialogPane>

@@ -3,6 +3,7 @@ package org.jabref.gui.exporter;
 import javax.inject.Inject;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -20,9 +21,9 @@ import org.fxmisc.easybind.EasyBind;
 
 public class ExportCustomizationDialogView extends BaseDialog<Void> {
 
-    @FXML private ButtonType addButton;
-    @FXML private ButtonType modifyButton;
-    @FXML private ButtonType removeButton;
+    @FXML private Button addButton;
+    @FXML private Button modifyButton;
+    @FXML private Button removeButton;
     @FXML private ButtonType closeButton;
     @FXML private TableView<ExporterViewModel> exporterTable;
     @FXML private TableColumn<ExporterViewModel, String> nameColumn;
@@ -41,20 +42,20 @@ public class ExportCustomizationDialogView extends BaseDialog<Void> {
                   .load()
                   .setAsDialogPane(this);
 
-        ControlHelper.setAction(addButton, getDialogPane(), event -> addExporter());
-        ControlHelper.setAction(modifyButton, getDialogPane(), event -> modifyExporter());
-        ControlHelper.setAction(removeButton, getDialogPane(), event -> removeExporter());
         ControlHelper.setAction(closeButton, getDialogPane(), event -> saveAndClose());
     }
 
+    @FXML
     private void addExporter() {
         viewModel.addExporter();
     }
 
+    @FXML
     private void modifyExporter() {
         viewModel.modifyExporter();
     }
 
+    @FXML
     private void removeExporter() {
         viewModel.removeExporters();
     }

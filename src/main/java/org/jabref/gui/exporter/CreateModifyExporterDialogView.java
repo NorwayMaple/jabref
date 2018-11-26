@@ -2,7 +2,6 @@ package org.jabref.gui.exporter;
 
 import javax.inject.Inject;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -62,7 +61,7 @@ public class CreateModifyExporterDialogView extends BaseDialog<ExporterViewModel
     }
 
     @FXML
-    private void browse(ActionEvent event) {
+    private void browse() {
         viewModel.browse();
     }
 
