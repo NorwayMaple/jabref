@@ -53,11 +53,7 @@ public class CreateModifyExporterDialogViewModel extends AbstractViewModel {
     }
 
     public ExporterViewModel saveExporter() {
-        Path layoutFileDir = Paths.get(layoutFile.get()).getParent();
-        if (layoutFileDir != null) {
-            String layoutFileDirString = layoutFileDir.toString();
-            preferences.setExportWorkingDirectory(layoutFileDirString);
-        }
+        setExportWorkingDirToParentDir(layoutFile.get());
 
         // Check that there are no empty strings.
         if (layoutFile.get().isEmpty() || name.get().isEmpty() || extension.get().isEmpty()
@@ -87,6 +83,7 @@ public class CreateModifyExporterDialogViewModel extends AbstractViewModel {
             .withDefaultExtension(Localization.lang("Custom layout file"), StandardFileType.LAYOUT)
             .withInitialDirectory(getExportWorkingDirectory()).build();
         dialogService.showFileOpenDialog(fileDialogConfiguration).ifPresent(f -> layoutFile.set(f.toAbsolutePath().toString())); //implement setting the text
+        setExportWorkingDirToParentDir(layoutFile.get());
     }
 
     private void setTextFields(ExporterViewModel exporter) {
@@ -96,6 +93,14 @@ public class CreateModifyExporterDialogViewModel extends AbstractViewModel {
             name.setValue(exporter.getName().get());
             layoutFile.setValue(exporter.getLayoutFileName().get());
             extension.setValue(exporter.getExtension().get());
+        }
+    }
+
+    private void setExportWorkingDirToParentDir(String layoutFile) {
+        Path layoutFileDir = Paths.get(layoutFile).getParent();
+        if (layoutFileDir != null) {
+            String layoutFileDirString = layoutFileDir.toString();
+            preferences.setExportWorkingDirectory(layoutFileDirString);
         }
     }
 
