@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.jabref.logic.l10n.Localization;
@@ -35,6 +36,10 @@ public class DBMSConnection implements DatabaseConnection {
             // we use the side effect of getAvailableDBMSTypes() - it loads all available drivers
             DBMSConnection.getAvailableDBMSTypes();
             DriverManager.setLogWriter(new PrintWriter(System.out));
+            Set<Entry<Object, Object>> propertyKeys = connectionProperties.asProperties().entrySet();
+            for (Entry<Object, Object> entry : propertyKeys) {
+                System.out.println("Connection Property: " + entry.getKey().toString() + " = " + entry.getValue().toString());
+            }
             this.connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.asProperties());
 
         } catch (SQLException e) {
